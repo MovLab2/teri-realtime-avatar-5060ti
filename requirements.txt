@@ -1,3 +1,7 @@
+# Base requirements for SoulX-FlashHead
+# NOTE: For Blackwell GPUs (RTX 50-series), also use requirements_blackwell.txt
+# which pins torch 2.7.1+cu128 and provides the correct install order.
+
 opencv-python>=4.12.0.88
 opencv-python-headless>=4.12.0.88
 diffusers>=0.34.0
@@ -9,14 +13,13 @@ imageio
 easydict
 ftfy
 imageio-ffmpeg
-scikit-image   
+scikit-image
 loguru
 gradio==5.50.0
 xfuser>=0.4.3
 pyloudnorm
 decord
-xformers==0.0.31
 librosa
 mediapipe==0.10.9
 flask
-nvidia-nccl-cu12==2.27.3
+nvidia-nccl-cu12==2.26.2

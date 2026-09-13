@@ -1,0 +1,11 @@
+# Extra dependencies not in the base SoulX or Pipecat requirements
+# These are needed for the voice-enabled bot (webrtc_pr.py)
+
+# Local speech-to-text (Moonshine) — free, runs on CPU
+moonshine-voice>=0.1.5
+
+# Audio file reading/writing (used by Moonshine and the pipeline)
+soundfile>=0.12.0
+
+# Environment variables from .env
+python-dotenv>=1.0.0

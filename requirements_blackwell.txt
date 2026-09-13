@@ -1,0 +1,50 @@
+# =============================================================
+# Blackwell (RTX 50-series) install sequence
+# =============================================================
+# For RTX 5060 Ti, 5070 Ti, 5080, 5090 (sm_120) and similar
+# Requires: CUDA 12.8 driver, Python 3.10
+#
+# DO NOT install requirements.txt first — install in this order:
+#
+#   STEP 1: torch 2.7.1 + torchvision 0.22.1 (cu128 index)
+#   STEP 2: flash_attn 2.8.0.post2 (prebuilt wheel)
+#   STEP 3: requirements.txt (base SoulX deps)
+#   STEP 4: requirements_pipecat.txt (Pipecat + LiveKit)
+#   STEP 5: requirements_extra.txt (Moonshine STT + helpers)
+#
+# =============================================================
+# STEP 1 — PyTorch
+# =============================================================
+# pip install torch==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu128
+#
+# =============================================================
+# STEP 2 — FlashAttention (prebuilt wheel)
+# =============================================================
+# pip install ninja
+# pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.0.post2/flash_attn-2.8.0.post2+cu12torch2.7cxx11abiFALSE-cp310-cp310-linux_x86_64.whl --no-build-isolation
+#
+# If the wheel URL 404s, fall back to source build (30-90 min):
+# pip install flash-attn --no-build-isolation
+#
+# =============================================================
+# STEP 3 — Base SoulX dependencies
+# =============================================================
+# pip install -r requirements.txt
+#
+# =============================================================
+# STEP 4 — Pipecat and LiveKit
+# =============================================================
+# pip install -r requirements_pipecat.txt
+#
+# =============================================================
+# STEP 5 — Extra dependencies (Moonshine STT, soundfile, dotenv)
+# =============================================================
+# pip install -r requirements_extra.txt
+#
+# =============================================================
+# NOTES FOR NON-BLACKWELL GPUs
+# =============================================================
+# - Ampere (3090, A100, etc): use the same torch 2.7.1+cu128 and flash_attn 2.8.0.post2.
+#   The wheel is compatible with cu118, cu121, and cu128.
+# - Ada (4090, L40, etc): same.
+# - Hopper (H100): use FlashAttention 3 for best performance.
