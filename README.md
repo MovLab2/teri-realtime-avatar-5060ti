@@ -1,6 +1,6 @@
 # Teri — Real-Time AI Avatar on an RTX 5060 Ti
 
-A fully real-time AI talking-head avatar that runs entirely on a single consumer GPU: the **NVIDIA RTX 5060 Ti (Blackwell)**. Voice and text input, OpenAI-powered conversation, local speech-to-text, and diffusion-generated video streamed live over WebRTC via LiveKit.
+A fully real-time AI talking-head avatar that runs entirely on a single consumer GPU: the **NVIDIA RTX 5060 Ti (Blackwell)**. Voice and text input, OpenAI-powered conversation (or a no-AI parrot mode), local speech-to-text, and diffusion-generated video streamed live over WebRTC via LiveKit.
 
 **Verified working as of September 2026.**
 
@@ -15,6 +15,18 @@ This is not a tutorial project. It is a working, tested real-time pipeline:
 - **Video generation** via SoulX-FlashHead Lite (diffusion, ~0.79 s per 1.32 s chunk — 1.6× real-time)
 - **Streaming** via LiveKit Cloud (WebRTC)
 - **Idle motion** driven by a background ambient music loop
+
+### Two Modes
+
+**AI Mode** — `webrtc_pr.py`
+Voice or text -> ChatGPT (gpt-4o-mini) thinks and replies -> Nova HD voice -> avatar lip-syncs.
+Best for real conversation. ~7-8 second response time.
+
+**Parrot Mode** — `webrtc_pr_parrot.py`
+Voice or text -> Nova HD voice repeats what you said -> avatar lip-syncs.
+No ChatGPT. Lower latency (~6s). Cheaper (no chat tokens). Best for demos, voice-over, or when you want the avatar to be *your* voice.
+
+Both modes support voice input (Moonshine) and text input (terminal). Both run on the same SoulX-FlashHead model.
 
 ## Hardware tested
 
@@ -156,7 +168,12 @@ You should hear yourself. If not, check Windows Sound settings, Input, ensure th
 
     conda activate flashhead
     cd teri-realtime-avatar-5060ti
+
+    # AI mode (ChatGPT-powered conversation)
     python webrtc_pr.py
+
+    # OR parrot mode (repeats what you say in Nova's voice)
+    python webrtc_pr_parrot.py
 
 Wait for these log lines:
 
@@ -261,11 +278,16 @@ Personality (in webrtc_pr.py):
 - Mic is on the bot machine. Guests do not hear you speak to the AI. A second mic on the viewer machine, or code changes to publish the bot mic, would fix this.
 - 512x512 native resolution. Higher resolutions need a different model or upscaling.
 
+## Fixed
+
+- **Mic-queue phantom cancellations** (fixed 2026-09-13). Stale Moonshine entries used to block typed input, causing apparent hangs. Now mic entries older than 3 seconds are dropped automatically. Applied to both `webrtc_pr.py` and `webrtc_pr_parrot.py`.
+
 ## File reference
 
 | File | Purpose |
 |---|---|
-| webrtc_pr.py | Main bot (voice + text input, current version) |
+| webrtc_pr.py | AI mode (ChatGPT conversation, voice + text input) |
+| webrtc_pr_parrot.py | Parrot mode (repeats what you say in Nova's voice, no ChatGPT) |
 | webrtc_pr_FINAL_VOICE_DEBOUNCED.py | Same as webrtc_pr.py, labeled copy |
 | webrtc_pr_KNOWN_GOOD.py | Text-only version (no voice) |
 | webrtc_pr_FILE_ONLY_WORKING.py | Original file-driven test bot |
@@ -287,6 +309,7 @@ The bot file, voice input integration, Blackwell compatibility fixes, and this d
 
 ## Roadmap
 
+- ~~Fix mic-queue phantom cancellations~~ DONE (2026-09-13)
 - Fix LiveKit chat integration (video quality issue)
 - Publish the bot mic to the room
 - Optional: ElevenLabs TTS integration
