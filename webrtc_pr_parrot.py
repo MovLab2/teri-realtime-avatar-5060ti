@@ -233,17 +233,12 @@ class WebRTCSyncPusher(FrameProcessor):
                 continue
 
             try:
-                # 1. Get AI reply
-                logger.info(f"Sending to OpenAI: {user_text}")
+                # 1. Parrot mode - repeat the user's text, skip ChatGPT
+                logger.info(f"Parrot input: {user_text}")
                 self.chat_history.append({"role": "user", "content": user_text})
-                response = await asyncio.to_thread(
-                    self.openai_client.chat.completions.create,
-                    model=self.chat_model,
-                    messages=self.chat_history,
-                )
-                reply = response.choices[0].message.content
+                reply = user_text
                 self.chat_history.append({"role": "assistant", "content": reply})
-                logger.info(f"AI reply: {reply}")
+                logger.info(f"Parrot: {reply}")
 
                 # 2. TTS -> MP3
                 mp3_resp = await asyncio.to_thread(
