@@ -68,3 +68,4 @@ models/
 *_SAVED*.py
 examples/girl.png.bak
 examples/croped*.png
+README.md.before_patch
