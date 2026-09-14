@@ -62,3 +62,9 @@ gradio_results_multigpu/
 tools/
 models
 models/
+
+# Local backups and intermediate files
+*.before_queue_fix
+*_SAVED*.py
+examples/girl.png.bak
+examples/croped*.png
