@@ -4,6 +4,10 @@ A fully real-time AI talking-head avatar that runs entirely on a single consumer
 
 **Verified working as of September 2026.**
 
+## Demo
+
+[Watch the 25-second demo video](assets/demo/teri_demo_2026-09-13.mp4) — the avatar speaking its intro, generated live on the RTX 5060 Ti.
+
 ## What this is
 
 This is not a tutorial project. It is a working, tested real-time pipeline:
