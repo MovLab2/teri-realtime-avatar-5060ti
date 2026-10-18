@@ -301,6 +301,18 @@ Personality (in webrtc_pr.py):
 | examples/ | Avatar image, ambient music, test audio |
 | requirements*.txt | Dependencies (see install order above) |
 
+
+---
+
+## Optional Integrations
+
+Want free local voice, a standalone viewer, or Sapphire automation?
+
+See **[README_KOKORO.md](README_KOKORO.md)** for an optional Kokoro TTS + Sapphire setup that runs alongside the base project.
+
+**Nothing in the base README changes.** The optional add-on is a separate set of files.
+
+
 ## Credits
 
 This project builds on:
