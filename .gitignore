@@ -70,3 +70,6 @@ examples/girl.png.bak
 examples/croped*.png
 README.md.before_patch
 README.md.before_demo
+webrtc_pr_parrot_kokoro.py.before_webhook
+webrtc_pr_parrot_kokoro.py.pre_kokoro
+run_parrot.sh
