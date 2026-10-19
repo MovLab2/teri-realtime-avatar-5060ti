@@ -85,3 +85,13 @@ LiveKit tokens expire (usually 24h). Regenerate before each session, or automate
 - All base dependencies, configs, and models — unchanged
 
 This add-on is purely additive. If you don't use it, nothing about the base project is affected.
+
+## Credits
+
+This integration builds directly on:
+
+- **[Sapphire](https://github.com/ddxfish/sapphire)** by Chris (ddxfish) — the local AI agent framework that provides the Kokoro TTS server and plugin system used here. Huge thanks to Chris for building Sapphire and for the quick help debugging the `user/plugins/` layout — without that, this add-on wouldn't exist.
+- **[Kokoro TTS](https://github.com/hexgrad/kokoro)** by hexgrad — the local voice model.
+- **[LiveKit](https://livekit.io)** — the WebRTC streaming layer.
+
+If you want the full Sapphire experience (memory, tools, personas, integrations), see the Sapphire repo above. This add-on only uses Sapphire's TTS server and plugin hooks — it's a thin bridge, not a fork.

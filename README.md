@@ -310,6 +310,8 @@ Want free local voice, a standalone viewer, or Sapphire automation?
 
 See **[README_KOKORO.md](README_KOKORO.md)** for an optional Kokoro TTS + Sapphire setup that runs alongside the base project.
 
+Special thanks to **[Chris (ddxfish)](https://github.com/ddxfish/sapphire)** — Sapphire provides the local Kokoro TTS server and the plugin system this integration uses.
+
 **Nothing in the base README changes.** The optional add-on is a separate set of files.
 
 
